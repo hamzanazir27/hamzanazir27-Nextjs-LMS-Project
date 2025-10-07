@@ -10,7 +10,7 @@ export default function NavBar() {
         <input
           type="text"
           placeholder="Search..."
-          className="w-[200px] outline-none text-sm"
+          className="w-[200px] outline-none text-sm bg-transparent"
         />
       </div>
 
@@ -30,6 +30,7 @@ export default function NavBar() {
           <span className="text-[10px] text-gray-500 text-right">Admin</span>
         </div>
         <Image
+          alt=""
           src="/avatar.png"
           className="rounded-full"
           width={24}
