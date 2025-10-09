@@ -1,3 +1,5 @@
+"use client";
+
 import CountChart from "@/components/CountChart";
 import UserCard from "@/components/UserCard";
 
