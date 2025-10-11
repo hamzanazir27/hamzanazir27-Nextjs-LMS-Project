@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import {
@@ -9,46 +11,19 @@ import {
 
 const data = [
   {
-    name: "18-24",
-    uv: 31.47,
-    pv: 2400,
-    fill: "#8884d8",
+    name: "Total",
+    count: 100,
+    fill: "white",
   },
   {
-    name: "25-29",
-    uv: 26.69,
-    pv: 4567,
-    fill: "#83a6ed",
+    name: "Boys",
+    count: 53,
+    fill: "#C3EBFA",
   },
   {
-    name: "30-34",
-    uv: 15.69,
-    pv: 1398,
-    fill: "#8dd1e1",
-  },
-  {
-    name: "35-39",
-    uv: 8.22,
-    pv: 9800,
-    fill: "#82ca9d",
-  },
-  {
-    name: "40-49",
-    uv: 8.63,
-    pv: 3908,
-    fill: "#a4de6c",
-  },
-  {
-    name: "50+",
-    uv: 2.63,
-    pv: 4800,
-    fill: "#d0ed57",
-  },
-  {
-    name: "unknow",
-    uv: 6.67,
-    pv: 4800,
-    fill: "#ffc658",
+    name: "Girls",
+    count: 50,
+    fill: "#FAE27C",
   },
 ];
 
@@ -60,7 +35,7 @@ const style = {
 };
 const CountChart = () => {
   return (
-    <div className="bg-white rounded-xl w-full h-full">
+    <div className=" relative bg-white rounded-xl w-full h-full">
       {/* Title */}
       <div className="flex justify-between items-center p-4 ">
         <div className="text-lg font-semibold">Students</div>
@@ -68,31 +43,26 @@ const CountChart = () => {
       </div>
 
       {/* chart */}
-      <div>
-        {/* <ResponsiveContainer width="100%" height="100%">
+      <div className="w-full  h-[65%]">
+        <ResponsiveContainer>
           <RadialBarChart
             cx="50%"
             cy="50%"
-            innerRadius="10%"
-            outerRadius="80%"
-            barSize={10}
+            innerRadius="40%"
+            outerRadius="100%"
+            barSize={32}
             data={data}
           >
-            <RadialBar
-            //   minAngle={15}
-              label={{ position: "insideStart", fill: "#fff" }}
-              background
-            //   clockWise
-              dataKey="uv"
-            />
-            <Legend
-              iconSize={10}
-              layout="vertical"
-              verticalAlign="middle"
-              wrapperStyle={style}
-            />
+            <RadialBar background dataKey="count" />
           </RadialBarChart>
-        </ResponsiveContainer> */}
+        </ResponsiveContainer>
+        <Image
+          src="/maleFemale.png"
+          width={50}
+          height={50}
+          className=" absolute top-1/2 left-1/2 -translate-x-[60%] -translate-y-[80%]"
+          alt=""
+        />
       </div>
 
       {/* bottom */}
