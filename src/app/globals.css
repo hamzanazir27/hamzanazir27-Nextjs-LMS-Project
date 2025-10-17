@@ -115,3 +115,56 @@
   color: gray;
   margin-bottom: 5px;
 }
+.calendar-container {
+  height: 100vh !important; /* full screen */
+}
+
+.rbc-calendar {
+  height: 98% !important; /* almost full */
+}
+/* Parent Event Box */
+.rbc-event {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+  overflow: hidden !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  padding: 2px !important;
+}
+
+/* Label Text */
+.rbc-event-label {
+  width: 100% !important;
+  text-align: center !important;
+  overflow: visible !important; /*  visible so it doesn't cut off */
+  white-space: normal !important; /* allow wrapping */
+  word-break: break-word !important; /*  break long text */
+  line-height: 1.1 !important;
+
+  /*  Responsive font scaling */
+  font-size: clamp(0.45rem, 0.8vw, 0.9rem) !important;
+}
+
+/* Content Text (subject like "Math") */
+.rbc-event-content {
+  width: 100% !important;
+  text-align: center !important;
+  overflow: visible !important;
+  white-space: normal !important;
+  word-break: break-word !important;
+  line-height: 1.2 !important;
+  font-weight: 600 !important;
+
+  font-size: clamp(0.5rem, 1vw, 1rem) !important;
+}
+
+/*  Mobile screens: compress more */
+@media (max-width: 768px) {
+  .rbc-event-label,
+  .rbc-event-content {
+    font-size: clamp(0.4rem, 0.9vw, 0.8rem) !important;
+  }
+}
