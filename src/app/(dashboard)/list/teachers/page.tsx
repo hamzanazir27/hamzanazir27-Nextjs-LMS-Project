@@ -1,10 +1,129 @@
+//
+
 "use client";
 
 import Image from "next/image";
 import TableSearch from "@/components/TableSearch";
 import Pagination from "@/components/Pagination";
+import Table from "@/components/Table";
+import Link from "next/link";
+
+type Teacher = {
+  id: number;
+  teacherId: string;
+  name: string;
+  email?: string;
+  photo: string;
+  phone: string;
+  subjects: string[];
+  classes: string[];
+  address: string;
+};
+
+const teachersData: Teacher[] = [
+  {
+    id: 1,
+    teacherId: "T001",
+    name: "John Doe",
+    email: "john@example.com",
+    photo: "https://randomuser.me/api/portraits/men/1.jpg",
+    phone: "123-456-7890",
+    subjects: ["Math", "Physics"],
+    classes: ["1A", "2B"],
+    address: "123 Main St",
+  },
+  {
+    id: 2,
+    teacherId: "T002",
+    name: "Jane Smith",
+    email: "jane@example.com",
+    photo: "https://randomuser.me/api/portraits/women/2.jpg",
+    phone: "098-765-4321",
+    subjects: ["English", "History"],
+    classes: ["3C", "4D"],
+    address: "456 Oak Ave",
+  },
+];
 
 export default function TeachersPage() {
+  // Get role from your auth system (e.g., session, context, etc.)
+  const role = "admin"; // or 'teacher', 'student', etc.
+
+  // Define columns
+  const columns = [
+    {
+      header: "Info",
+      accessor: "info",
+    },
+    {
+      header: "Teacher ID",
+      accessor: "teacherId",
+      className: "hidden md:table-cell",
+    },
+    {
+      header: "Subjects",
+      accessor: "subjects",
+      className: "hidden md:table-cell",
+    },
+    {
+      header: "Classes",
+      accessor: "classes",
+      className: "hidden md:table-cell",
+    },
+    {
+      header: "Phone",
+      accessor: "phone",
+      className: "hidden lg:table-cell",
+    },
+    {
+      header: "Address",
+      accessor: "address",
+      className: "hidden lg:table-cell",
+    },
+    {
+      header: "Actions",
+      accessor: "actions",
+    },
+  ];
+
+  // Define how each row should be rendered
+  const renderRow = (item: Teacher) => (
+    <>
+      <td className="flex items-center gap-4 p-4">
+        <Image
+          src={item.photo}
+          alt={item.name}
+          width={40}
+          height={40}
+          className="md:hidden xl:block w-10 h-10 rounded-full object-cover"
+        />
+        <div className="flex flex-col">
+          <h3 className="font-semibold">{item.name}</h3>
+          <p className="text-xs text-gray-500">{item.email}</p>
+        </div>
+      </td>
+      <td className="hidden md:table-cell">{item.teacherId}</td>
+      <td className="hidden md:table-cell">{item.subjects.join(", ")}</td>
+      <td className="hidden md:table-cell">{item.classes.join(", ")}</td>
+      <td className="hidden lg:table-cell">{item.phone}</td>
+      <td className="hidden lg:table-cell">{item.address}</td>
+      <td>
+        <div className="flex items-center gap-2">
+          <Link href={`/list/teachers/${item.id}`}>
+            <button className="flex items-center justify-center rounded-full bg-lamaSky w-7 h-7">
+              <Image src="/view.png" alt="view" width={16} height={16} />
+            </button>
+          </Link>
+          {role === "admin" && (
+            <button className="flex items-center justify-center rounded-full bg-lamaPurple w-7 h-7">
+              <Image src="/delete.png" alt="delete" width={16} height={16} />
+            </button>
+          )}
+        </div>
+      </td>
+    </>
+  );
+
   return (
     <div className="bg-white p-4 rounded-md flex-1 mt-4 mx-2">
       {/* Top Section */}
@@ -33,10 +152,8 @@ export default function TeachersPage() {
         </div>
       </div>
 
-      {/* Table Section (placeholder for now) */}
-      <div className="mt-6 border rounded-md p-4 text-gray-500 text-sm text-center">
-        Table data will appear here...
-      </div>
+      {/* Table Section */}
+      <Table columns={columns} renderRow={renderRow} data={teachersData} />
 
       {/* Pagination */}
       <div className="mt-6">
