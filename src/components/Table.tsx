@@ -28,7 +28,10 @@ const Table = ({ columns, renderRow, data }: TableProps) => {
         {data.map((item) => (
           <tr
             key={item.id}
-            className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-lamaPurpleLight"
+            className={
+              "border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-lamaPurpleLight" +
+              `${item?.className}`
+            }
           >
             {renderRow(item)}
           </tr>
