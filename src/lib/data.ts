@@ -701,7 +701,7 @@ export const resultsData = [
     id: 4,
     subject: "Social Studies",
     class: "1B",
-    teacher: "John Doe",
+    teacher: "John HIgh",
     student: "John Doe",
     date: "2025-01-01",
     type: "exam",
