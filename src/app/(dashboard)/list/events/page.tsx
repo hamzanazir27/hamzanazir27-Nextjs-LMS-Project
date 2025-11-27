@@ -7,22 +7,32 @@ import TableSearch from "@/components/TableSearch";
 import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import Link from "next/link";
-import { role, lessonsData } from "@/lib/data";
+import { role, eventsData } from "@/lib/data";
 // Define columns
 const columns = [
   {
-    header: "Subject Name",
-    accessor: "subjectname",
+    header: "Title",
+    accessor: "title",
   },
 
   {
-    header: "class",
+    header: "Class",
     accessor: "class",
     className: "hidden md:table-cell",
   },
   {
-    header: "Teacher",
-    accessor: "teacher",
+    header: "Date",
+    accessor: "date",
+    className: "hidden lg:table-cell",
+  },
+  {
+    header: "StartTime",
+    accessor: "starttime",
+    className: "hidden lg:table-cell",
+  },
+  {
+    header: "EndTime",
+    accessor: "endtime",
     className: "hidden lg:table-cell",
   },
 
@@ -32,30 +42,35 @@ const columns = [
   },
 ];
 
-type Class = {
+type Event = {
   id: number;
-  subject: string;
+  title: string;
   class: string;
-  teacher: string;
+  date: string;
+  startTime: string;
+  endTime: string;
 };
 
-export default function LessensPage() {
-  const renderRow = (item: Class) => (
+export default function EventPage() {
+  const renderRow = (item: Event) => (
     <>
       <td className="flex items-center gap-4 p-4">
         <div className="flex flex-col">
-          <h3 className="font-semibold">{item.subject}</h3>
+          <h3 className="font-semibold">{item.title}</h3>
         </div>
       </td>
       <td className="hidden md:table-cell">{item.class}</td>
 
-      <td className="hidden lg:table-cell">{item.teacher}</td>
+      <td className="hidden lg:table-cell">{item.date}</td>
+
+      <td className="hidden lg:table-cell">{item.startTime}</td>
+      <td className="hidden lg:table-cell">{item.endTime}</td>
 
       <td>
         <div className="flex items-center gap-2">
           <Link href={`/list/teachers/${item.id}`}>
             <button className="flex items-center justify-center rounded-full bg-lamaSky w-7 h-7">
-              <Image src="/edit.png" alt="view" width={16} height={16} />
+              <Image src="/view.png" alt="view" width={16} height={16} />
             </button>
           </Link>
           {role === "admin" && (
@@ -73,7 +88,7 @@ export default function LessensPage() {
       {/* Top Section */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         {/* Left: Title */}
-        <h1 className="text-lg font-semibold hidden md:block">All Lessons</h1>
+        <h1 className="text-lg font-semibold hidden md:block">All Events</h1>
 
         {/* Right: Search + Buttons */}
         <div className="flex flex-col md:flex-row items-center gap-3 md:gap-4 w-full md:w-auto">
@@ -97,7 +112,7 @@ export default function LessensPage() {
       </div>
 
       {/* Table Section */}
-      <Table columns={columns} renderRow={renderRow} data={lessonsData} />
+      <Table columns={columns} renderRow={renderRow} data={eventsData} />
 
       {/* Pagination */}
       <div className="mt-6">
