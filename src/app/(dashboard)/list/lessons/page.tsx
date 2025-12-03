@@ -8,6 +8,7 @@ import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import Link from "next/link";
 import { role, lessonsData } from "@/lib/data";
+import FormModel from "@/components/FormModel";
 // Define columns
 const columns = [
   {
@@ -59,9 +60,7 @@ export default function LessensPage() {
             </button>
           </Link>
           {role === "admin" && (
-            <button className="flex items-center justify-center rounded-full bg-lamaPurple w-7 h-7">
-              <Image src="/delete.png" alt="delete" width={16} height={16} />
-            </button>
+            <FormModel table="lesson" type="delete" id={item.id} />
           )}
         </div>
       </td>
@@ -81,17 +80,15 @@ export default function LessensPage() {
 
           {/* Buttons */}
           <div className="flex items-center gap-2 self-end md:self-auto">
-            <button className="flex items-center justify-center w-10 h-10 rounded-full bg-yellow-400 hover:bg-yellow-500">
+            <button className="flex items-center justify-center w-8 h-8 rounded-full bg-lamaYellow hover:bg-yellow-500">
               <Image src="/filter.png" alt="Filter" width={18} height={18} />
             </button>
 
-            <button className="flex items-center justify-center w-10 h-10 rounded-full bg-yellow-400 hover:bg-yellow-500">
+            <button className="flex items-center justify-center w-8 h-8 rounded-full bg-lamaYellow hover:bg-yellow-500">
               <Image src="/sort.png" alt="Sort" width={18} height={18} />
             </button>
 
-            <button className="flex items-center justify-center w-10 h-10 rounded-full bg-yellow-400 hover:bg-yellow-500">
-              <Image src="/plus.png" alt="Add" width={18} height={18} />
-            </button>
+            <FormModel table="lesson" type="create" />
           </div>
         </div>
       </div>
