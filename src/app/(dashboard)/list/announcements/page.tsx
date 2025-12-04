@@ -7,6 +7,7 @@ import Table from "@/components/Table";
 import Link from "next/link";
 import { role, announcementsData } from "@/lib/data";
 import FormModel from "@/components/FormModel";
+
 // Define columns
 const columns = [
   {

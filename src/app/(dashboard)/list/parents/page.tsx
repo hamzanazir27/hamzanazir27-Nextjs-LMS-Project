@@ -64,13 +64,16 @@ export default function ParentsPage() {
       <td className="hidden lg:table-cell">{item.address}</td>
       <td>
         <div className="flex items-center gap-2">
-          <Link href={`/list/teachers/${item.id}`}>
-            <button className="flex items-center justify-center rounded-full bg-lamaSky w-7 h-7">
-              <Image src="/edit.png" alt="view" width={16} height={16} />
-            </button>
-          </Link>
           {role === "admin" && (
-            <FormModel table="parent" type="delete" id={item.id} />
+            <>
+              <FormModel
+                table="parent"
+                type="update"
+                data={item}
+                id={item.id}
+              />
+              <FormModel table="parent" type="delete" id={item.id} />
+            </>
           )}
         </div>
       </td>
