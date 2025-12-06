@@ -34,7 +34,7 @@ export default function EventCallander() {
 
   return (
     <div className="p-4 bg-white rounded-md ite">
-      <Calendar onChange={onChange} value={value} />
+      <Calendar value={value} />
       <div className="flex flex-col gap-4 mt-4">
         {/* Title */}
         <div className="flex justify-between items-center p-4 ">
