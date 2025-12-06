@@ -8,9 +8,9 @@ interface InputFieldProps {
   label: string;
   name: string;
   type?: string;
-  register: UseFormRegister<any>; // React Hook Form ka register function
-  error?: FieldError; // Validation error object
-  defaultValue?: string; // Add defaultValue to the props
+  register: UseFormRegister<any>;
+  error?: FieldError;
+  defaultValue?: string | number | readonly string[] | undefined;
 }
 
 // --- 2. INPUT FIELD COMPONENT ---
@@ -20,10 +20,11 @@ const InputField: React.FC<InputFieldProps> = ({
   type = "text",
   register,
   error,
-  defaultValue, // Accept defaultValue as a prop
+  defaultValue,
 }) => {
   return (
-    <div className="flex flex-col gap-2 w-full md:w-1/4">
+    // FINAL FIX: w-full sm:w-[calc(33.33%-1rem)] min-w-[200px] ensures 3-column layout
+    <div className="flex flex-col gap-2 w-full sm:w-[calc(33.33%-1rem)] min-w-[200px]">
       {/* Label */}
       <label className="text-xs text-gray-500" htmlFor={name}>
         {label}
@@ -33,9 +34,9 @@ const InputField: React.FC<InputFieldProps> = ({
       <input
         id={name}
         type={type}
-        defaultValue={defaultValue} // Pass defaultValue to the input element
+        defaultValue={defaultValue}
         {...register(name)}
-        className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+        className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full focus:ring-blue-500 focus:border-blue-500"
       />
 
       {/* Error Display Logic */}

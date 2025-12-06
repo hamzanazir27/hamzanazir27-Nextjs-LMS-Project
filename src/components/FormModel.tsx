@@ -1,8 +1,18 @@
+// ModelForm.tsx
 "use client";
 
 import Image from "next/image";
 import { useState } from "react";
 import TeacherForm from "./forms/TeacherForm";
+import StudentForm from "./forms/StudentForm";
+
+const forms: {
+  [key: string]: (type: "create" | "update", data?: any) => JSX.Element;
+} = {
+  teacher: (type, data) => <TeacherForm type={type} data={data} />,
+  student: (type, data) => <StudentForm type={type} data={data} />,
+  // Add other forms dynamically here
+};
 
 const ModelForm = ({
   table,
@@ -47,9 +57,10 @@ const ModelForm = ({
           Delete
         </button>
       </form>
+    ) : type === "create" || type === "update" ? (
+      forms[table]?.(type, data) || <span>Form not found!</span>
     ) : (
-      if (table === "teacher" && (type === "create" ))
-      <TeacherForm type={type} data={data} />
+      <span>Form not found!</span>
     );
   };
 
@@ -63,19 +74,22 @@ const ModelForm = ({
       </button>
 
       {isOpen && (
-        <div className="h-screen w-screen absolute left-0 top-0 bg-black bg-opacity-60 z-50 items-center justify-center">
-          <div className="bg-white relative rounded-lg p-6 w-[90%] max-w-2xl mx-auto mt-20">
-            <div className="flex justify-between items-center mb-4">
+        <div className="h-screen w-screen fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center p-4">
+          {/* SCROLL FIX: max-h aur overflow-y-auto add kiye */}
+          <div className="bg-white relative rounded-lg p-6 w-[90%] max-w-4xl max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between items-center mb-4 border-b pb-2">
               <h2 className="text-xl font-semibold capitalize">
                 {type} {table}
               </h2>
-              <button onClick={() => setOpen(false)}>
-                <Image src="/close.png" alt="" width={20} height={20} />
+              <button
+                onClick={() => setOpen(false)}
+                className="hover:opacity-70"
+              >
+                <Image src="/close.png" alt="Close" width={20} height={20} />
               </button>
             </div>
 
             <Form />
-            {/* FormModel component would be used here */}
           </div>
         </div>
       )}
