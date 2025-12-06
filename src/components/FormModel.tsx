@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import TeacherForm from "./forms/TeacherForm";
 
 const ModelForm = ({
   table,
@@ -47,7 +48,8 @@ const ModelForm = ({
         </button>
       </form>
     ) : (
-      <div className="p-4">{/* "create or update form" */}</div>
+      if (table === "teacher" && (type === "create" ))
+      <TeacherForm type={type} data={data} />
     );
   };
 
